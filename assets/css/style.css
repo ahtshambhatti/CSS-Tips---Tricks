@@ -9,3 +9,7 @@ h1>span {
 .wavy_line {
     text-decoration: underline wavy;
 }
+
+.box-wrapper{
+    box-shadow: 0 0 8px 2px #fff;
+}
