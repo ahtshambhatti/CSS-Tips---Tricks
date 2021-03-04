@@ -5,3 +5,7 @@ body {
 h1>span {
     color: greenyellow;
 }
+
+.wavy_line {
+    text-decoration: underline wavy;
+}
