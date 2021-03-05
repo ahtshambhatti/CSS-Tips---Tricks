@@ -11,12 +11,15 @@ h1>span {
 }
 
 .box-wrapper{
-    box-shadow: 0 0 8px 2px #fff;
+    border-radius: 30px;
+    box-shadow: 0px -1px 13px 8px #fff,0 0 8px 16px lime,2px 3px 18px 30px yellow;
 }
 .box-wrapper>h1{
     font-size: 120px;
     color: #dfa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: underline wavy chartreuse;
-    padding: 1rem;
+    padding: 30px;
+    text-decoration-thickness: 3px;
+    text-shadow: 0 0 8px 3px darkorchid;
 }
