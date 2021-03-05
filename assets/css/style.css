@@ -13,3 +13,9 @@ h1>span {
 .box-wrapper{
     box-shadow: 0 0 8px 2px #fff;
 }
+.box-wrapper>h1{
+    font-size: 120px;
+    color: #dfa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: underline wavy chartreuse;
+}
