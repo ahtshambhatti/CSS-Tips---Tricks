@@ -18,4 +18,5 @@ h1>span {
     color: #dfa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: underline wavy chartreuse;
+    padding: 1rem;
 }
