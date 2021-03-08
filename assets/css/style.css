@@ -8,6 +8,7 @@ h1>span {
 
 .wavy_line {
     text-decoration: underline wavy;
+    transition-duration: 5000ms;
 }
 
 .box-wrapper{
