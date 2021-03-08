@@ -20,6 +20,7 @@ h1>span {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: underline wavy chartreuse;
     padding: 30px;
-    text-decoration-thickness: 3px;
+    text-decoration-thickness: 5px;
     text-shadow: 0 0 8px 3px darkorchid;
+
 }
