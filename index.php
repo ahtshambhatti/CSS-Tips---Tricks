@@ -12,6 +12,9 @@
         </div>
         <div title="Positioning in CSS" class="Positioning_inCSS">
             <h1>Positions In CSS</h1>
+            <div class="relative_postion" title="Relative Position">
+                <p>Relative Position</p>
+            </div>
         </div>
     </body>
 </html>
