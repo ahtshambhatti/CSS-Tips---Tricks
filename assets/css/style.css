@@ -22,5 +22,10 @@ h1>span {
     padding: 30px;
     text-decoration-thickness: 5px;
     text-shadow: 0 0 8px 3px darkorchid;
-
+}
+.Positioning_inCSS{
+    background-color: saddlebrown;
+}
+.Positioning_inCSS > h1 {
+    text-align: center;
 }
