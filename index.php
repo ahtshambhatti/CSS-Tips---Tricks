@@ -15,6 +15,11 @@
             <div class="relative_postion" title="Relative Position">
                 <h3>Relative Position</h3>
                 <p>Relative to <b>elements</b> Orignal position</p>
+                <span>{<br>
+                    position: relative;<br>
+                    top: 30px;<br>
+                    left: 60px;<br>}
+                </span>
             </div>
         </div>
     </body>
