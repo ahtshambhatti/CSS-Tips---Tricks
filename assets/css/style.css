@@ -49,3 +49,7 @@ h1>span {
 .relative_postion>h3,p{
     text-align: center;
 }
+.relative_postion>pre{
+    color: #234523;
+    font-weight: bold;
+}
