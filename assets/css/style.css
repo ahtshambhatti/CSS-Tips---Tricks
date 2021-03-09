@@ -25,6 +25,11 @@ h1>span {
 }
 .Positioning_inCSS{
     background-color: saddlebrown;
+    padding: 20px;
+    border-radius: 30px;
+    border-top-left-radius: 150px;
+    border-bottom-right-radius: 150px;
+    box-shadow: 0 0 8px 3px skyblue;
 }
 .Positioning_inCSS > h1 {
     text-align: center;
