@@ -13,7 +13,8 @@
         <div title="Positioning in CSS" class="Positioning_inCSS">
             <h1>Positions In CSS</h1>
             <div class="relative_postion" title="Relative Position">
-                <p>Relative Position</p>
+                <h3>Relative Position</h3>
+                <p>Relative to <b>elements</b> Orignal position</p>
             </div>
         </div>
     </body>
