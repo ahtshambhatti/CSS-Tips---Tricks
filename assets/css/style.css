@@ -34,7 +34,7 @@ h1>span {
 .Positioning_inCSS > h1 {
     text-align: center;
 }
-.relative_postion{
+.relative_position{
     background-color:#fff;
     width: 25%;
     border-radius: 8px;
@@ -46,10 +46,10 @@ h1>span {
     bottom: 40px; */
     left: 30px;
 }
-.relative_postion>h3,p{
+.relative_position>h3,p{
     text-align: center;
 }
-.relative_postion>pre{
+.relative_position>pre{
     color: #234523;
     font-weight: bold;
 }
