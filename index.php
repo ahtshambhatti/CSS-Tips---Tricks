@@ -29,8 +29,8 @@
     <pre>
         {
             position: absolute;
-            top: 30px;
-            left: 60px;
+            top: 579px;
+            left: 420px;
         }
     </pre>
             </div>
