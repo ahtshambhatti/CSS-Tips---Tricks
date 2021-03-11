@@ -53,3 +53,22 @@ h1>span {
     color: #234523;
     font-weight: bold;
 }
+.absolute_position{
+    background-color: red;
+    background-color:#fff;
+    width: 25%;
+    border-radius: 8px;
+    padding: 2px 8px;
+    /* border:1px dotted red; */
+    position: absolute;
+    box-shadow:0px 0px 10px -2px lime ;
+    top: 579px;
+    left: 420px;
+}
+.absolute_position>h3,p{
+    text-align: center;
+}
+.absolute_position>pre{
+    color: #234523;
+    font-weight: bold;
+}
