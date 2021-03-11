@@ -23,6 +23,17 @@
         }
     </pre>
             </div>
+            <div class="absolute_postion" title="Absolute Position">
+                <h3>Absolute Position</h3>
+                <p>Change positions relative to its <b>Parent's</b> Body</p>
+    <pre>
+        {
+            position: absolute;
+            top: 30px;
+            left: 60px;
+        }
+    </pre>
+            </div>
         </div>
     </body>
 </html>
