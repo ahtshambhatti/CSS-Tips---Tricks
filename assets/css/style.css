@@ -60,3 +60,7 @@ h1>span {
     top: 579px;
     left: 420px;
 }
+.fixed_position{
+    margin: 700px;
+    /* position: fixed; */
+}
