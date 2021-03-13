@@ -61,6 +61,7 @@ h1>span {
     left: 920px;
 }
 .fixed_position{
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-left: 60px;
     /* position: fixed; */
 }
