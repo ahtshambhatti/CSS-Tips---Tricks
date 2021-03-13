@@ -77,3 +77,14 @@ h1>span {
         margin-right: 50px;
     position: sticky;   
 }
+.positionConceptImg{
+    width: 37%;
+    height: 70%;
+    background: url('../Images/Positions.jpg');
+    position: absolute;
+    top: 579px;
+    left: 430px;
+    background-repeat: no-repeat;
+    background-size: contain;   
+    /* box-shadow: 1px 3px 4px 4px #fff; */
+}
