@@ -33,6 +33,11 @@ h1>span {
 }
 .Positioning_inCSS > h1 {
     text-align: center;
+    color: blue;
+    text-shadow: 0px 3px 3px #fff, 0px 6px 3px lime;
+    letter-spacing: 0.5rem;
+    font-variant-caps: all-petite-caps;
+    background: url('../images/0.png');
 }
 .position_box{
     background-color:#fff;
