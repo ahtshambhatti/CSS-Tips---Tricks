@@ -67,8 +67,8 @@ h1>span {
     display: inline-block;
 }
 .sticky_position{
-    float: right;
-    margin-top: 30px;
-    margin-right: 50px;
+        float: right;
+        margin-top: 30px;
+        margin-right: 50px;
     position: sticky;   
 }
