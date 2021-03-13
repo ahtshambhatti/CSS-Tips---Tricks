@@ -53,14 +53,14 @@ h1>span {
     position: relative;
     /* top: 30px;
     bottom: 40px; */
-    left: 30px;
+    left: 60px;
 }
 .absolute_position{
     position: absolute;
     top: 579px;
-    left: 420px;
+    left: 920px;
 }
 .fixed_position{
-    margin: 700px;
+    margin-top: 20px;
     /* position: fixed; */
 }
