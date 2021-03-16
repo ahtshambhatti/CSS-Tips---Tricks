@@ -88,3 +88,9 @@ h1>span {
     background-size: contain;   
     /* box-shadow: 1px 3px 4px 4px #fff; */
 }
+
+.list_formates{
+    background-color: cornsilk;
+    margin: 3% auto;
+    padding: 3%;
+}
