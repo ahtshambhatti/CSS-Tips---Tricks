@@ -127,3 +127,10 @@ h1>span {
     box-shadow: 1px 0px 15px 7px yellow,4px 7px 10px 13px  red;
     margin-bottom: 5%;
 }
+
+.personal_image>img{
+    width: 100%;
+    height: 100%;
+    border-radius: 39% 3% 39% 3%;
+    background: linear-gradient(0deg, #00000088 100%, #ffffff44 100%);
+}
