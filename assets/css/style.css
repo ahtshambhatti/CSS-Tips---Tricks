@@ -12,7 +12,8 @@ a{
     text-decoration: underline wavy #e11d74 2px ;
 }
 .wavy_line {
-    text-decoration: underline wavy;
+    text-decoration: underline wavy #234523;
+    color: #dfa;
 }
 
 .box-wrapper{
