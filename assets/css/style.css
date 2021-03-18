@@ -5,7 +5,13 @@ body {
 h1>span {
     color: greenyellow;
 }
-
+a{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    margin: 15px;
+    text-decoration: underline wavy #e11d74 2px ;
+}
 .wavy_line {
     text-decoration: underline wavy;
 }
