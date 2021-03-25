@@ -142,7 +142,7 @@ a{
 }
 #img_in_text_background{
     background-color: inherit;
-    border-radius: 65% 35% 65% 35%; 
+    border-radius: 65% 33% 65% 33%; 
     box-shadow: 1px 0px 15px 7px #fff,1px 0px 15px 7px yellow,4px 7px 10px 13px  red;
 }
 #img_in_text_background > p{
