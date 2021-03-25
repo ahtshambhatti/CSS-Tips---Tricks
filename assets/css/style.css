@@ -140,3 +140,12 @@ a{
     border-radius: 39% 3% 39% 3%;
     background: linear-gradient(0deg, #00000088 100%, #ffffff44 100%);
 }
+
+#img_in_text_background > p{
+    background-image: url('../Images/aht.png');
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 70px;
+    font-weight: bolder;
+}
