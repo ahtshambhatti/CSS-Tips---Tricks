@@ -1,0 +1,379 @@
+<!--- <cfoutput>
+    <div class="collapse-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="card">
+            <div class="card-header" role="tab" id="heading-1">
+            <h5 class="mb-0">
+                <a class="d-block" data-toggle="collapse" data-parent="##accordion" href="##collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                Tab 1
+                <span class="float-right">Select All <input type="checkbox" id="sa_foo" name="sa_foo" data-checkbox-name="foo" class="selectall"/></span>
+                </a>
+            </h5>
+            </div>
+            <div id="collapse-1" class="collapse" role="tabpanel" aria-labelledby="heading-1">
+                <div class="card-body">
+                    <div id="accordion-1">
+                        <div class="card">
+                            <div class="card-header" id="heading-1-1">
+                            <h5 class="mb-0">
+                                <a class="collapsed">
+                                Item 1
+                                </a>
+                                <span class="float-right"><input type="checkbox" id="foo_1" name="foo" value="1" data-select-all="sa_foo" class="checkme" data-toggle="collapse" data-target="##collapse-1-1"/></span>
+                            </h5>
+                            </div>
+                                <div id="collapse-1-1" name="foo" class="collapse" aria-labelledby="heading-1-1">
+                                <div class="card-body">
+                                    Text 1
+                                </div>
+                                </div>
+                        </div>
+                    </div>      
+                </div>
+            </div>
+        </div>
+    </div>
+</cfoutput>
+
+<script>
+
+$(document).ready(function(){
+    // Select All checkbox should not expand accordion header
+    $(".selectall").on("click", function(event) {
+        event.stopPropagation();
+    });
+		// Select all Items once Select All checkbox is clicked
+    $(':checkbox.selectall').on('click', function(){
+      //$(':checkbox[name="' + $(this).data('checkbox-name') + '"]').prop("checked", $(this).prop("checked"));
+      $(':checkbox[name="' + $(this).data('checkbox-name') + '"]').click();
+    });
+});
+
+</script> --->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Collapsible List</title>
+    <meta charset="utf-8">
+
+<style>
+    .collapse{
+        width: 33%;
+        width: fit-content;
+        display: inline-flex;
+        flex-wrap: wrap;
+    }
+    .collapse, .collapse ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .collapse li { 
+        padding-top: 3px; 
+        padding-bottom: 3px; 
+    }
+    .catChkbx{
+        cursor: pointer;
+    }
+    /* TOGGLE */
+    .toggle {
+        padding: 4px 14px;
+        cursor: pointer;
+        display: inline-block;
+        float: left;
+        font-weight: bolder;
+    }
+    .toggle::before {
+        display: inline-block;
+        width: 15px;
+        content: "+";
+    }
+    .toggle.show::before { 
+        content: "-"; 
+    }
+    /* SHOW/HIDE */
+    .collapse ul { 
+        display: none; 
+    }
+    .toggle.show + ul { 
+        display: block; 
+    }
+    .spacing{
+        padding-left : 37px;
+    }
+	.column {
+	  background-color: #F2F1F0; 
+      height: 300px;
+      overflow: auto;
+      flex-grow: 1;
+	}
+	.container {
+	    /* display: flex; */
+        /* height: 300px; */
+	}	
+</style>
+   
+  </head>
+  <body>
+
+
+<div class="">
+<cfoutput>
+    <cfset u.category_specialty = "1001,1002">
+
+    <cfquery name="catP" datasource="#application.DataSource#">
+        SELECT * FROM GetCategories(1001,1)
+        WHERE owner_id IN (0,1001)
+    </cfquery>
+    <div width="100%">
+        <lablel for="category_specialty">
+            <span class="catChkbx" onClick="selectSubCategory(#catP.category_id#,#catP.owner_id#,'all');">
+                <b>#catP.description#</b>
+                <input class="category_specialty cat-#catP.category_id# own-#catP.owner_id#" type="checkbox" value="#catP.category_id#" <cfif ListFindNoCase(u.category_specialty, catP.category_id)>checked</cfif>>
+            </span>
+        </label>
+    </div>
+
+    <cfloop query="catP" startrow="2">
+        <cfquery name="cat" datasource="#application.DataSource#">
+            SELECT * FROM GetCategories(1001,1)
+            WHERE owner_id = #catP.category_id#
+        </cfquery>
+        <ul class="collapse">
+            <li class="lbl-#catP.category_id#">
+                <lablel for="category_specialty">
+                    <span class="catChkbx" onClick="selectSubCategory(#catP.category_id#,#catP.owner_id#,'parent');">
+                        <b>#catP.description#</b>
+                        <input class="category_specialty cat-#catP.category_id# own-#catP.owner_id#" type="checkbox" value="#catP.category_id#" <cfif ListFindNoCase(u.category_specialty, catP.category_id)>checked</cfif>>
+                    </span>
+                </label>
+                <ul class="column">
+                    <cfloop query="cat">
+                        <li class="spacing">
+                            <lablel for="category_specialty">
+                                <span class="catChkbx" onClick="selectSubCategory(#cat.category_id#,#cat.owner_id#);">
+                                    #cat.description#
+                                    <input class="category_specialty cat-#cat.category_id# own-#cat.owner_id#" type="checkbox" value="#cat.category_id#" <cfif ((ListFindNoCase(u.category_specialty, catP.category_id) OR (ListFindNoCase(u.category_specialty, catP.category_id) AND catP.category_id EQ cat.owner_id)))>checked</cfif>>
+                                </span>
+                            </label>
+                        </li>
+                    </cfloop>
+                </ul>
+            </li>
+        </ul>   
+    </cfloop>
+</cfoutput>
+</div>
+
+
+
+    <script>
+        window.addEventListener("load", () => {
+            for (let i of document.querySelectorAll(".collapse ul")) {
+                let tog = document.createElement("div");
+                tog.innerHTML = i.previousSibling.textContent;
+                tog.className = "toggle";
+                tog.onclick = () => tog.classList.toggle("show");
+                i.parentElement.removeChild(i.previousSibling);
+                i.parentElement.insertBefore(tog, i);
+            }
+        });
+
+        function selectSubCategory(categoryID, ownerID, type="child"){
+            let catChecked = document.querySelector(".cat-"+categoryID).checked;
+            document.querySelector(".cat-"+categoryID).checked = !catChecked;
+
+            if(type == "all") {
+                // select all
+                for (let i of document.querySelectorAll(".category_specialty")) {
+                    i.checked = !catChecked;
+                }
+            }
+            else if ( type == "parent") {
+                // select all subCategories
+                for (let i of document.querySelectorAll(".own-"+categoryID)) {
+                    i.checked = !catChecked;
+                }
+            }
+            // else {
+            //     // on subCategory selection
+            // }
+        }
+    </script>
+  </body>
+</html>
+
+<html>
+  <head>
+    <title>Collapsible List</title>
+    <meta charset="utf-8">
+
+
+    <cfset u.category_specialty = "1001,1002">
+
+<div class="category_specialty_box">           
+    <!--- <cfsavecontent variable="categoryInput"> --->
+        <style>
+            .category_specialty_box{
+                width: 462px;
+                height: 300px;
+                overflow: auto;         
+            }
+            .category_specialty_box::-webkit-scrollbar,.column::-webkit-scrollbar {
+                border-radius: 20px;
+                width: 12px;
+            }
+            .category_specialty_box::-webkit-scrollbar-track,.column::-webkit-scrollbar {
+                background: silver;
+            }
+            .category_specialty_box::-webkit-scrollbar-thumb,.column::-webkit-scrollbar {
+                background-color: gray;
+                border-radius: 20px;
+            }
+
+            .collapse{
+                width: auto;
+                display: inline-flex;
+                flex-wrap: wrap;
+            }
+            .collapse, .collapse ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            .collapse ul{
+                width: inherit;
+            }
+            .collapse li { 
+                padding-top: 3px; 
+                padding-bottom: 3px; 
+            }
+            .catChkbx, .catChkbx input{
+                cursor: pointer;
+            }
+            /* TOGGLE */
+            .toggle {
+                padding: 4px 14px;
+                cursor: pointer;
+                display: inline-block;
+                float: left;
+                font-weight: bolder;
+            }
+            .toggle::before {
+                display: inline-block;
+                width: 15px;
+                content: "+";
+            }
+            .toggle.show::before { 
+                content: "-"; 
+            }
+            /* SHOW/HIDE */
+            .collapse ul { 
+                display: none; 
+            }
+            .toggle.show + ul { 
+                display: block; 
+            }
+            .spacing{
+                padding-left : 37px;
+            }
+            .column {
+                background-color: #F2F1F0; 
+                height: 300px;
+                overflow: auto;
+                flex-grow: 1;
+            }
+        </style>
+        <cfoutput>
+            <cfquery name="catP" datasource="#application.DataSource#">
+                SELECT * FROM GetCategories(1001,1)
+                WHERE owner_id IN (0,1001)
+            </cfquery>
+            <div width="100%">
+                <lablel for="category_specialty">
+                    <span class="catChkbx" onClick="selectSubCategory(#catP.category_id#,#catP.owner_id#,'all');">
+                        <b>#catP.description#</b>
+                        <input class="category_specialty cat-#catP.category_id# own-#catP.owner_id# A" type="checkbox" value="#catP.category_id#" <cfif ListFindNoCase(u.category_specialty, catP.category_id)>checked</cfif>>
+                    </span>
+                </label>
+            </div>
+        
+            <cfloop query="catP" startrow="2">
+                <cfquery name="cat" datasource="#application.DataSource#">
+                    SELECT * FROM GetCategories(1001,1)
+                    WHERE owner_id = #catP.category_id#
+                </cfquery>
+                <ul class="collapse">
+                    <li class="lbl-#catP.category_id#">
+                        <lablel for="category_specialty">
+                            <span class="catChkbx" onClick="selectSubCategory(#catP.category_id#,#catP.owner_id#,'parent');">
+                                <b>#catP.description#</b>
+                                <input class="category_specialty cat-#catP.category_id# own-#catP.owner_id# P" type="checkbox" value="#catP.category_id#" <cfif ListFindNoCase(u.category_specialty, catP.category_id)>checked</cfif>>
+                            </span>
+                        </label>
+                        <ul class="column">
+                            <cfloop query="cat">
+                                <li class="spacing">
+                                    <lablel for="category_specialty">
+                                        <span class="catChkbx" onClick="selectSubCategory(#cat.category_id#,#cat.owner_id#);">
+                                            #cat.description#
+                                            <input class="category_specialty cat-#cat.category_id# own-#cat.owner_id# C" type="checkbox" value="#cat.category_id#" <cfif ((ListFindNoCase(u.category_specialty, catP.category_id) OR (ListFindNoCase(u.category_specialty, catP.category_id) AND catP.category_id EQ cat.owner_id)))>checked</cfif>>
+                                        </span>
+                                    </label>
+                                </li>
+                            </cfloop>
+                        </ul>
+                    </li>
+                </ul>   
+            </cfloop>
+        </cfoutput>
+        <script>
+            function applyToggleBtn() {
+                for (let i of document.querySelectorAll(".collapse ul")) {
+                    let tog = document.createElement("div");
+                    tog.innerHTML = i.previousSibling.textContent;
+                    tog.className = "toggle";
+                    tog.onclick = () => tog.classList.toggle("show");
+                    i.parentElement.removeChild(i.previousSibling);
+                    i.parentElement.insertBefore(tog, i);
+                }
+            }
+            applyToggleBtn();
+        
+            function selectSubCategory(categoryID, ownerID, type="child"){
+                let catChecked = document.querySelector(".cat-"+categoryID).checked;
+                document.querySelector(".cat-"+categoryID).checked = !catChecked;
+        
+                if(type == "all") {
+                    // select all
+                    for (let i of document.querySelectorAll(".category_specialty")) {
+                        i.checked = !catChecked;
+                    }
+                }
+                else if ( type == "parent") {
+                    // select all subCategories
+                    for (let i of document.querySelectorAll(".own-"+categoryID)) {
+                        i.checked = !catChecked;
+                    }
+                }
+            }
+            $('.category_specialty').on('click', function(){
+                let classArr = $(this).attr('class').split(' ');
+                let categoryID = classArr[1];
+                let ownerID = classArr[2];
+                let type = classArr[3];
+                let catChecked = document.querySelector('.'+categoryID).checked;
+                document.querySelector('.'+categoryID).checked = !catChecked;
+                if(type == "A") {
+                    for (let i of document.querySelectorAll(".category_specialty")) {
+                        i.checked = !catChecked;
+                    }
+                }
+                else if ( type == "P") {
+                    let  own = categoryID.split('-');
+                    for (let i of document.querySelectorAll('.own-'+own[1])) {
+                        i.checked = !catChecked;
+                    }
+                }
+            });
+        </script>       
+    <!--- </cfsavecontent> --->
+</div>
