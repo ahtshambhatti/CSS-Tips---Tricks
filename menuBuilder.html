@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+
+  <style>
+    .menu-item {
+      padding: 3px;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      cursor: grab;
+    }
+	#items-list {
+		min-height: 50px;
+		border: 1px solid #ddd;
+    }
+    #selected-items {
+	  min-height: 100px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+  
+  <div class="container-fluid">
+  <h2><span>Menus</span></h2>
+
+  <div class="content info-box">		
+    <a href="{{url('manage-menus?id=new')}}">Create a new menu</a>.	
+  </div>
+
+  <div class="row" id="main-row">				
+	<div class="col-sm-3 cat-form @if(count($menus) == 0) disabled @endif">
+      <h3><span>Add Menu Items</span></h3>			
+
+	  <div class="panel-group" id="menu-items">
+		
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+		  <a href="#posts-list" data-toggle="collapse" data-parent="#menu-items">PAGES <span class="caret pull-right"></span></a>
+		</div>
+		<div class="panel-collapse collapse" id="posts-list">
+		  <div class="panel-body">						
+			<div id="items-list" class="item-list-body">
+			  <p class="menu-item"> Post Title One</p>
+			  <p class="menu-item"> Post Title Two</p>
+			  <p class="menu-item"> Post Title Three</p>
+			  <p class="menu-item"> Post Title Four</p>
+			  <p class="menu-item"> Post Title Five</p>
+			</div>	
+		  </div>						
+		</div>
+		  </div>
+	  <div class="panel panel-default">
+		<div class="panel-heading">
+	      <a href="#custom-links" data-toggle="collapse" data-parent="#menu-items">Custom Links <span class="caret pull-right"></span></a>
+		</div>
+		<div class="panel-collapse collapse" id="custom-links">
+		  <div class="panel-body">						
+			<div class="item-list-body">
+			  <div class="form-group">
+				<label>URL</label>
+				<input type="url" id="url" class="form-control" placeholder="https://">
+			  </div>
+			  <div class="form-group">
+				<label>Link Text</label>
+			      <input type="text" id="linktext" class="form-control" placeholder="">
+				</div>
+			  </div>	
+			  <div class="item-list-footer">
+				<button type="button" class="pull-right btn btn-default btn-sm" id="add-custom-link">Add to Menu</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>		
+	</div>		
+
+	<div class="col-sm-9 cat-view">
+	  <h3><span>Menu Structure</span></h3>
+	  
+	    <h4>Create New Menu</h4>
+	    <form method="post" action="{{url('create-menu')}}">
+		  
+		  <div class="row">
+		    <div class="col-sm-12">
+		      <label>Name</label>
+			</div>
+			<div class="col-sm-6">
+			  <div class="form-group">							
+			    <input type="text" name="title" class="form-control">
+			  </div>
+			  <div id="selected-items" class="menu-container">
+
+			  </div>
+			</div>
+			<div class="col-sm-6 text-right">
+			  <button class="btn btn-sm btn-primary">Create Menu</button>
+			</div>
+		  </div>
+		</form>			
+	  
+	</div>
+  </div>
+</div>
+
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>        
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div>
+
+<script>
+    let itemsList = document.getElementById('items-list');
+    let selectedItems = document.getElementById('selected-items');
+	
+	let itemsListFunc = new Sortable(itemsList, {
+		group: {
+			name: 'shared',
+			pull: true,
+			put: ['shared']
+		},
+		animation: 150,
+		ghostClass: 'menu-item-placeholder',
+		filter: '.sortable-placeholder'
+	});
+
+	let selectedItemsFunc = new Sortable(selectedItems, {
+		group: {
+			name: 'shared',
+			pull: true,
+			put: ['shared']
+		},
+		animation: 150,
+		ghostClass: 'menu-item-placeholder',
+		filter: '.sortable-placeholder',
+		onAdd: function (evt) {
+			setChildItemProps();
+		}
+	});
+
+	function setChildItemProps(){
+		let itemsListArr = selectedItems.getElementsByClassName('menu-item');
+
+		for (let i = 0; i < itemsListArr.length; i++) {
+			let item = itemsListArr[i];
+			let selectedItemsFunc = new Sortable(item, {
+				group: {
+					name: 'shared',
+					pull: true,
+					put: ['shared']
+				},
+				animation: 150,
+				ghostClass: 'menu-item-placeholder',
+				filter: '.sortable-placeholder',
+				onAdd: function (evt) {
+					let parentMenu = evt.to;
+					parentMenu.append(evt.item);
+				}
+			})
+		}
+	}
+
+</script>
+
+</body>
+</html>
